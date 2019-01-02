@@ -62,7 +62,8 @@
                     <ul class="nav-menu">
                         <li class="menu-active"><a href="{% url 'gallery:index' %}">Home</a></li>
                         <li><a href="#service">Services</a></li>
-                        <li><a href="projects.html">Projects</a></li>
+                        <!-- <li><a href="projects.html">Projects</a></li> -->
+                        <li><a href="{% url 'gallery:projects' %}">Projects</a></li>
                         {% comment %}
                         <li class="menu-has-children"><a href="">Blog</a>
                             <ul>
@@ -70,7 +71,6 @@
                                 <li><a href="blog-single.html">Blog Single</a></li>
                             </ul>
                         </li>
-                        {% endcomment %}
                         <li class="menu-has-children"><a href="javascript:void(0)">Pages</a>
                             <ul>
                                 <li><a href="project-details.html">Project Details</a></li>
@@ -83,8 +83,12 @@
                                 </li>
                             </ul>
                         </li>
+                        {% endcomment %}
                         <li><a href="#contact">Contact</a></li>
                         <li><a href="#about">About</a></li>
+                        {% comment %}
+                        <li><a href="{% url 'gallery:about' %}">About</a></li>
+                        {% endcomment %}
                     </ul>
                 </nav><!-- #nav-menu-container -->
             </div>

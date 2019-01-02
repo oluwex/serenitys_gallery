@@ -8,3 +8,7 @@ def index(request):
 
 def about(request):
     return render(request, 'gallery/about.html')
+
+
+def projects(request):
+    return render(request, 'gallery/projects.html')

@@ -17,6 +17,9 @@ class Design(models.Model):
     caption = models.TextField()
     design_type = models.ForeignKey(DesignType, on_delete=models.SET_NULL, null=True)
     pic = models.ImageField(upload_to=picture_directory_path)
+    client = models.CharField(max_length=50)
+    description = models.TextField()
+    time_completed = models.DateField()
 
     timestamp = models.DateTimeField(auto_now_add=True)
 
