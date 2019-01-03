@@ -1,21 +1,28 @@
 from django.db import models
 
-from choices.models import DesignType
-
 # Create your models here.
 
 def picture_directory_path(instance, filename):
-    if instance.design_type.name.lower() == '2d':
+    if instance.design_type == Design.TWO_D:
         return 'designs/2d/{0}'.format(filename)
-    elif instance.design_type.name.lower() == '3d':
+    elif instance.design_type == Design.THREE_D:
         return 'designs/3d/{0}'.format(filename)
     return 'designs/general/{0}'.format(filename)
 
 
 class Design(models.Model):
+
+    TWO_D = '2d'
+    THREE_D = '2d'
+
+    design_choices = (
+        (TWO_D, '2D'),
+        (THREE_D, '3D'),
+    )
+
     name = models.CharField(max_length=30)
     caption = models.TextField()
-    design_type = models.ForeignKey(DesignType, on_delete=models.SET_NULL, null=True)
+    design_type = models.CharField(max_length=5, choices=design_choices)
     pic = models.ImageField(upload_to=picture_directory_path)
     client = models.CharField(max_length=50)
     description = models.TextField()
