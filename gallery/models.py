@@ -24,7 +24,7 @@ class Design(models.Model):
     caption = models.TextField()
     design_type = models.CharField(max_length=5, choices=design_choices)
     pic = models.ImageField(upload_to=picture_directory_path)
-    client = models.CharField(max_length=50)
+    # client = models.CharField(max_length=50)
     description = models.TextField()
     time_completed = models.DateField()
 
@@ -32,3 +32,19 @@ class Design(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['-timestamp']
+
+
+class Message(models.Model):
+    sender_name = models.CharField(max_length=100)
+    sender_email = models.EmailField()
+    subject = models.CharField(max_length=100)
+    content = models.TextField()
+
+    timestamp = models.DateTimeField(auto_now_add=True)
+    sender_ip = models.GenericIPAddressField()
+
+    def __str__(self):
+        return self.sender_name

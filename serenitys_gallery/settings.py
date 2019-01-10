@@ -26,7 +26,7 @@ SECRET_KEY = 'l$xlpa6a@7381+e4yaru)*a&^9aq4lxan2=0w!dbt+z_c-1gst'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['serenitys-gallery.herokuapp.com']
+ALLOWED_HOSTS = ['serenitys-gallery.herokuapp.com', 'localhost']
 
 
 # Application definition

@@ -2,199 +2,227 @@
 
 {% load staticfiles %}
 
-{% block header %}
-    <header id="header" id="home">
-        <div class="header-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-sm-6 col-4 header-top-left no-padding">
-                        <a href="tel:+953 012 3654 896">+953 012 3654 896</a>
-                        <a href="mailto:support@colorlib.com">support@colorlib.com</a>
-                    </div>
-                    <div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                        </ul>
-                    </div>
+{% block nav-bar %}
+    <nav id="colorlib-main-menu" role="navigation">
+        <ul>
+            <li><a href="{% url 'gallery:index' %}">Home</a></li>
+            <li class="colorlib-active"><a href="{% url 'gallery:projects' %}">Portfolio</a></li>
+            <li><a href="{% url 'gallery:about' %}">About</a></li>
+            <!-- <li><a href="">Services</a></li> -->
+            <!-- <li><a href="blog.html">Blog</a></li> -->
+            <li><a href="{% url 'gallery:contact' %}">Contact</a></li>
+        </ul>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="colorlib-work">
+        <div class="colorlib-narrow-content">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+                    <span class="heading-meta">Portfolio</span>
+                    <h2 class="colorlib-heading">My Works</h2>
                 </div>
             </div>
-        </div>
-        <div class="container main-menu">
-            <div class="row align-items-center justify-content-between d-flex">
-                <div id="logo">
-                    <a href="index.html"><img src="{% static 'img/logo.png' %}" alt="" title="" /></a>
-                </div>
-                <nav id="nav-menu-container">
-                    <ul class="nav-menu">
-                        <li class="menu-active"><a href="{% url 'gallery:index' %}">Home</a></li>
-                        <li><a href="{% url 'gallery:index' %}#service">Services</a></li>
-                        <!-- <li><a href="projects.html">Projects</a></li> -->
-                        <li><a href="#">Projects</a></li>
-                        {% comment %}
-                        <li class="menu-has-children"><a href="">Blog</a>
-                            <ul>
-                                <li><a href="blog-home.html">Blog Home</a></li>
-                                <li><a href="blog-single.html">Blog Single</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-has-children"><a href="javascript:void(0)">Pages</a>
-                            <ul>
-                                <li><a href="project-details.html">Project Details</a></li>
-                                <li><a href="elements.html">Elements</a></li>
-                                <li class="menu-has-children"><a href="">Level 2 </a>
-                                    <ul>
-                                        <li><a href="#">Item One</a></li>
-                                        <li><a href="#">Item Two</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        {% endcomment %}
-                        <li><a href="{% url 'gallery:index' %}#contact">Contact</a></li>
-                        <li><a href="#about">About</a></li>
-                        {% comment %}
-                        <li><a href="{% url 'gallery:about' %}">About</a></li>
-                        {% endcomment %}
-                    </ul>
-                </nav><!-- #nav-menu-container -->
-            </div>
-        </div>
-    </header><!-- #header -->
-    {% endblock %}
-
-{% block content %} 
-<!-- start banner Area -->
-<section class="banner-area relative" id="home">	
-    <div class="overlay overlay-bg"></div>
-    <div class="container">				
-        <div class="row d-flex align-items-center justify-content-center">
-            <div class="about-content col-lg-12">
-                <h1 class="text-white">
-                    Projects				
-                </h1>	
-                <p class="text-white link-nav"><a href="{% url 'gallery:index' %}">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="{% url 'gallery:projects' %}"> Projects</a></p>
-            </div>	
-        </div>
-    </div>
-</section>
-<!-- End banner Area -->
-
-<!-- Start gallery Area -->
-<section class="gallery-area section-gap">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-12 pb-40 header-text text-center">
-                <h1 class="pb-10">Our Recent Works may impress you</h1>
-                <p>
-                    Who are in extremely love with eco friendly system.
-                </p>
-            </div>
-        </div>							
-        <div class="row">
             {% for design in object_list %}
-                {% cycle '<div class "col-lg-8">' '<div class "col-lg-8">' %}
-                    <div class="single-gallery">
-                            <div class="content">
-                                <a href="#" target="_blank">
-                                    <div class="content-overlay"></div>
-                                        <img class="content-image img-fluid d-block mx-auto" src="{% static 'img/g1.jpg' %}" alt="">
-                                    <div class="content-details fadeIn-bottom">
-                                    <h3 class="content-title mx-auto">Lavendar ambient interior</h3>
-                                    <a href="{% url 'gallery:project_detail' design.pk %}" class="primary-btn text-uppercase mt-20">More Details</a>
-                                    </div>
-                                </a>
+                <div class="row row-bottom-padded-md">
+                    <div class="{% cycle 'col-md-6' 'col-md-3' 'col-md-3' 'col-md-3' 'col-md-3' %} animate-box"
+                        data-animate-effect="fadeInLeft">
+                        <div class="project" style="background-image: url({{ design.pic.url }});">
+                            <div class="desc">
+                                <div class="con">
+                                    <h3><a href="javascript:void(0)">{{ design.name }}</a></h3>
+                                    <span>{{ design.get_design_type_display }}</span>
+                                    {% comment %}
+                                    <p class="icon">
+                                        <span><a href="#"><i class="icon-share3"></i></a></span>
+                                        <span><a href="#"><i class="icon-eye"></i> 100</a></span>
+                                        <span><a href="#"><i class="icon-heart"></i> 49</a></span>
+                                    </p>
+                                    {% endcomment %}
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                {% if object_list|length >= 10 %}
+                    {% if is_paginated %}
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                            <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                            <li class="disabled"><span>&laquo;</span></li>
+                            {% endif %}
+                            {% for i in paginator.page_range %}
+                            {% if page_obj.number == i %}
+                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                            {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                            <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                            <li class="disabled"><span>&raquo;</span></li>
+                            {% endif %}
+                    </ul>
+                    {% endif %}
+                {% endif %}           
             {% empty %}
-                <div class="col-lg-8">
-                    <div class="single-gallery">
-                        <div class="content">
-                            <a href="#" target="_blank">
-                              <div class="content-overlay"></div>
-                                   <img class="content-image img-fluid d-block mx-auto" src="{% static 'img/g1.jpg' %}" alt="">
-                              <div class="content-details fadeIn-bottom">
-                                <h3 class="content-title mx-auto">Lavendar ambient interior</h3>
-                                <a href="{% url 'gallery:project_detail' %}" class="primary-btn text-uppercase mt-20">More Details</a>
-                              </div>
-                            </a>
+            <div class="row row-bottom-padded-md">
+                <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+                    <div class="project" style="background-image: url({% static 'images/img-1.jpg' %});">
+                        <div class="desc">
+                            <div class="con">
+                                <h3><a href="javascript:void(0)">Work 01</a></h3>
+                                <span>Building</span>
+                                <!-- <p class="icon">
+                                    <span><a href="#"><i class="icon-share3"></i></a></span>
+                                    <span><a href="#"><i class="icon-eye"></i> 100</a></span>
+                                    <span><a href="#"><i class="icon-heart"></i> 49</a></span>
+                                </p> -->
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="single-gallery">
-                        <div class="content">
-                            <a href="#" target="_blank">
-                              <div class="content-overlay"></div>
-                                   <img class="content-image img-fluid d-block mx-auto" src="{% static 'img/g2.jpg' %}" alt="">
-                              <div class="content-details fadeIn-bottom">
-                                <h3 class="content-title mx-auto">Ambient interior</h3>
-                                <a href="{% url 'gallery:project_detail' %}" class="primary-btn text-uppercase mt-20">More Details</a>
-                              </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>	
-                <div class="col-lg-4">
-                    <div class="single-gallery">
-                        <div class="content">
-                            <a href="#" target="_blank">
-                              <div class="content-overlay"></div>
-                                   <img class="content-image img-fluid d-block mx-auto" src="{% static 'img/g3.jpg' %}" alt="">
-                              <div class="content-details fadeIn-bottom">
-                                <h3 class="content-title mx-auto">Ambient interior</h3>
-                                <a href="{% url 'gallery:project_detail' %}" class="primary-btn text-uppercase mt-20">More Details</a>
-                              </div>
-                            </a>
+                <div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
+                    <div class="project" style="background-image: url({% static 'images/img-2.jpg' %});">
+                        <div class="desc">
+                            <div class="con">
+                                <h3><a href="javascript:void(0)">Work 02</a></h3>
+                                <span>House, Apartment</span>
+                                <!-- <p class="icon">
+                                    <span><a href="#"><i class="icon-share3"></i></a></span>
+                                    <span><a href="#"><i class="icon-eye"></i> 100</a></span>
+                                    <span><a href="#"><i class="icon-heart"></i> 49</a></span>
+                                </p> -->
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-8">
-                    <div class="single-gallery">
-                        <div class="content">
-                            <a href="#" target="_blank">
-                              <div class="content-overlay"></div>
-                                   <img class="content-image img-fluid d-block mx-auto" src="{% static 'img/g4.jpg' %}" alt="">
-                              <div class="content-details fadeIn-bottom">
-                                <h3 class="content-title mx-auto">Lavendar ambient interior</h3>
-                                <a href="{% url 'gallery:project_detail' %}" class="primary-btn text-uppercase mt-20">More Details</a>
-                              </div>
-                            </a>
+                <div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
+                    <div class="project" style="background-image: url({% static 'images/img-3.jpg' %});">
+                        <div class="desc">
+                            <div class="con">
+                                <h3><a href="javascript:void(0)">Work 03</a></h3>
+                                <span>Dining Room</span>
+                                <!-- <p class="icon">
+                                    <span><a href="#"><i class="icon-share3"></i></a></span>
+                                    <span><a href="#"><i class="icon-eye"></i> 100</a></span>
+                                    <span><a href="#"><i class="icon-heart"></i> 49</a></span>
+                                </p> -->
+                            </div>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
+                <div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
+                    <div class="project" style="background-image: url({% static 'images/img-4.jpg' %});">
+                        <div class="desc">
+                            <div class="con">
+                                <h3><a href="javascript:void(0)">Work 04</a></h3>
+                                <span>House, Building</span>
+                                <!-- <p class="icon">
+                                    <span><a href="#"><i class="icon-share3"></i></a></span>
+                                    <span><a href="#"><i class="icon-eye"></i> 100</a></span>
+                                    <span><a href="#"><i class="icon-heart"></i> 49</a></span>
+                                </p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
+                    <div class="project" style="background-image: url({% static 'images/img-5.jpg' %});">
+                        <div class="desc">
+                            <div class="con">
+                                <h3><a href="javascript:void(0)">Work 05</a></h3>
+                                <span>Condo, Pad</span>
+                                <!-- <p class="icon">
+                                    <span><a href="#"><i class="icon-share3"></i></a></span>
+                                    <span><a href="#"><i class="icon-eye"></i> 100</a></span>
+                                    <span><a href="#"><i class="icon-heart"></i> 49</a></span>
+                                </p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+                    <div class="project" style="background-image: url({% static 'images/img-6.jpg' %});">
+                        <div class="desc">
+                            <div class="con">
+                                <h3><a href="javascript:void(0)">Work 06</a></h3>
+                                <span>Table, Chairs</span>
+                                <!-- <p class="icon">
+                                    <span><a href="#"><i class="icon-share3"></i></a></span>
+                                    <span><a href="#"><i class="icon-eye"></i> 100</a></span>
+                                    <span><a href="#"><i class="icon-heart"></i> 49</a></span>
+                                </p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
+                    <div class="project" style="background-image: url({% static 'images/img-7.jpg' %});">
+                        <div class="desc">
+                            <div class="con">
+                                <h3><a href="javascript:void(0)">Work 02</a></h3>
+                                <span>House, Apartment</span>
+                                <!-- <p class="icon">
+                                    <span><a href="#"><i class="icon-share3"></i></a></span>
+                                    <span><a href="#"><i class="icon-eye"></i> 100</a></span>
+                                    <span><a href="#"><i class="icon-heart"></i> 49</a></span>
+                                </p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
+                    <div class="project" style="background-image: url({% static 'images/img-8.jpg' %});">
+                        <div class="desc">
+                            <div class="con">
+                                <h3><a href="javascript:void(0)">Work 03</a></h3>
+                                <span>Dining Room</span>
+                                <!-- <p class="icon">
+                                    <span><a href="#"><i class="icon-share3"></i></a></span>
+                                    <span><a href="#"><i class="icon-eye"></i> 100</a></span>
+                                    <span><a href="#"><i class="icon-heart"></i> 49</a></span>
+                                </p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
+                    <div class="project" style="background-image: url({% static 'images/img-9.jpg' %});">
+                        <div class="desc">
+                            <div class="con">
+                                <h3><a href="javascript:void(0)">Work 04</a></h3>
+                                <span>House, Building</span>
+                                <!-- <p class="icon">
+                                    <span><a href="#"><i class="icon-share3"></i></a></span>
+                                    <span><a href="#"><i class="icon-eye"></i> 100</a></span>
+                                    <span><a href="#"><i class="icon-heart"></i> 49</a></span>
+                                </p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
+                    <div class="project" style="background-image: url({% static 'images/img-5.jpg' %});">
+                        <div class="desc">
+                            <div class="con">
+                                <h3><a href="javascript:void(0)">Work 05</a></h3>
+                                <span>Condo, Pad</span>
+                                <!-- <p class="icon">
+                                    <span><a href="#"><i class="icon-share3"></i></a></span>
+                                    <span><a href="#"><i class="icon-eye"></i> 100</a></span>
+                                    <span><a href="#"><i class="icon-heart"></i> 49</a></span>
+                                </p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>	
-</section>
-<!-- End gallery Area -->
-    
-<!-- Start brands Area -->
-<!-- <section class="brands-area pb-60 pt-60">
-    <div class="container no-padding">
-        <div class="brand-wrap">
-            <div class="row align-items-center active-brand-carusel justify-content-start no-gutters">
-                <div class="col single-brand">
-                    <a href="#"><img class="mx-auto" src="img/l1.png" alt=""></a>
-                </div>
-                <div class="col single-brand">
-                    <a href="#"><img class="mx-auto" src="img/l2.png" alt=""></a>
-                </div>
-                <div class="col single-brand">
-                    <a href="#"><img class="mx-auto" src="img/l3.png" alt=""></a>
-                </div>
-                <div class="col single-brand">
-                    <a href="#"><img class="mx-auto" src="img/l4.png" alt=""></a>
-                </div>
-                <div class="col single-brand">
-                    <a href="#"><img class="mx-auto" src="img/l5.png" alt=""></a>
-                </div>								
-            </div>																			
-        </div>
-    </div>	
-</section> -->
-<!-- End brands Area -->					
+    </div>
+{% endfor %}
 {% endblock %}
